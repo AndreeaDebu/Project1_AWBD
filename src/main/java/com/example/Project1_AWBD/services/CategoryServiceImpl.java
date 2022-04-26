@@ -15,8 +15,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<Recipe> findAll() {
-        return null;
+    public List<Category> findAll() {
+        return (List<Category>) categoryRepository.findAll();
     }
 
     @Override
@@ -25,12 +25,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Recipe save(Category category) {
-        return null;
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        categoryRepository.deleteById(id);
     }
 }

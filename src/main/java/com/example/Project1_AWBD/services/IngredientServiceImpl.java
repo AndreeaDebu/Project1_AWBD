@@ -1,6 +1,8 @@
 package com.example.Project1_AWBD.services;
 
 import com.example.Project1_AWBD.entities.Ingredient;
+import com.example.Project1_AWBD.repositories.IngredientRepository;
+import com.example.Project1_AWBD.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,23 +13,25 @@ import java.util.Optional;
 @AllArgsConstructor
 public class IngredientServiceImpl implements IngredientService {
 
+    private final IngredientRepository ingredientRepository;
+
     @Override
     public List<Ingredient> findAll() {
-        return null;
+        return (List<Ingredient>) ingredientRepository.findAll();
     }
 
     @Override
     public Optional<Ingredient> findById(Long id) {
-        return Optional.empty();
+        return ingredientRepository.findById(id);
     }
 
     @Override
     public Ingredient save(Ingredient ingredient) {
-        return null;
+        return ingredientRepository.save(ingredient);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        ingredientRepository.deleteById(id);
     }
 }

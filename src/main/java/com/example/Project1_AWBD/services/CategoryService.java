@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryService {
-    List<Recipe> findAll();
+    List<Category> findAll();
     Optional<Category> findById(Long id);
-    Recipe save(Category category);
+    Category save(Category category);
     void deleteById(Long id);
 }
