@@ -15,6 +15,6 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Recipe> recipes;
 }

@@ -29,9 +29,9 @@ public class Recipe {
 
     @ManyToMany(
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "category",
-            joinColumns = @JoinColumn(referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
+    @JoinTable(name = "recipie_category",
+            joinColumns = @JoinColumn(name = "recipe_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id",referencedColumnName = "id"))
     private List<Category> categories;
 
     public Recipe removeIngredient(Ingredient ingredient) {
