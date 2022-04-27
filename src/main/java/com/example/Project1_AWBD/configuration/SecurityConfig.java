@@ -2,7 +2,6 @@ package com.example.Project1_AWBD.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,27 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("GUEST");
     }
 
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()/*.anyRequest().authenticated()*/
-//                .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
-//                .antMatchers("/recipe/**").hasRole("CUSTOMER")
-//                .and()
-//                .formLogin().loginPage("/showLogInForm")
-//                .loginProcessingUrl("/authUser")
-//                .failureUrl("/login-error").permitAll()
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/access_denied");
-//
-//        http.csrf().ignoringAntMatchers("/h2-console/**");
-//        http.headers()
-//                .frameOptions()
-//                .sameOrigin();
-//
-//
-//    }
-
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().anyRequest()
+                .authenticated().and().formLogin()
+                .loginPage("/recipe/findAll")
+                .loginProcessingUrl("/recipe/findAll")
+                .failureUrl("/login-error")
+                .permitAll();
+    }
 
 }

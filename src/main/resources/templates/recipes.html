@@ -25,22 +25,22 @@
         <tr th:each="product, stat : ${products}"
             th:class="${stat.odd}? 'table-light':'table-dark'"
                 >
-            <td th:text="${product.id}">1</td>
-            <td th:text="${product.name}">Product 1</td>
-            <td th:text="${product.code}">Code</td>
-            <td th:text="${product.reservePrice}">Reserved price</td>
-            <td><a href="#" th:href="@{'/product/info/' + ${product.id}}">Info</a></td>
-            <td><a href="#" th:href="@{'/product/delete/' + ${product.id}}">Delete</a></td>
+            <td th:text="${recipe.id}">1</td>
+            <td th:text="${recipe.cook_time}">Product 1</td>
+            <td th:text="${recipe.description}">Code</td>
+            <td th:text="${recipe.difficulty}">Reserved price</td>
+            <td><a href="#" th:href="@{'/recipe/findById/' + ${recipe.id}}">Info</a></td>
+            <td><a href="#" th:href="@{'/recipe/deleteById/' + ${recipe.id}}">Delete</a></td>
         </tr>
     </table>
 </div>
 <div class="container">
     <div class="row">
         <div sec:authorize="hasRole('CUSTOMER')">
-            <a class="btn btn-primary" role="button" th:href="@{'/product/new'}">add product</a>
+            <a class="btn btn-primary" role="button" th:href="@{'/recipe/addRecipe'}">add product</a>
         </div>
         <div class="col-md-3">
-            <a class="btn btn-primary" role="button" th:href="@{'/participant/new'}">register</a>
+            <a class="btn btn-primary" role="button" th:href="@{'/recipe/addRecipe'}">register</a>
         </div>
 
         <div class="col-md-3">
