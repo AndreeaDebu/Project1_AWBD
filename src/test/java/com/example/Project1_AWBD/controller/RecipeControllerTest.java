@@ -8,10 +8,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -33,16 +32,4 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/findAll/"))
                 .andExpect(status().isNotFound());
     }
-
-   /* @Test
-    public void save() throws Exception {
-        mockMvc.perform(post("/recipe/add/", new Recipe()))
-                .andExpect(status().is2xxSuccessful());
-    }
-
-    @Test
-    public void delete() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/recipe/deleteById/{id}/","111"))
-                .andExpect(status().isForbidden());
-    }*/
 }
