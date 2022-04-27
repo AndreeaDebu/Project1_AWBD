@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Profile("h2")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -32,25 +31,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()/*.anyRequest().authenticated()*/
-                .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
-                .antMatchers("/recipe/**").hasRole("CUSTOMER")
-                .and()
-                .formLogin().loginPage("/showLogInForm")
-                .loginProcessingUrl("/authUser")
-                .failureUrl("/login-error").permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/access_denied");
-
-        http.csrf().ignoringAntMatchers("/h2-console/**");
-        http.headers()
-                .frameOptions()
-                .sameOrigin();
-
-
-    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()/*.anyRequest().authenticated()*/
+//                .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
+//                .antMatchers("/recipe/**").hasRole("CUSTOMER")
+//                .and()
+//                .formLogin().loginPage("/showLogInForm")
+//                .loginProcessingUrl("/authUser")
+//                .failureUrl("/login-error").permitAll()
+//                .and()
+//                .exceptionHandling().accessDeniedPage("/access_denied");
+//
+//        http.csrf().ignoringAntMatchers("/h2-console/**");
+//        http.headers()
+//                .frameOptions()
+//                .sameOrigin();
+//
+//
+//    }
 
 
 
