@@ -21,7 +21,7 @@ public class Recipe {
 
     private Integer servings;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredient> ingredients;
 
     @Enumerated(value = EnumType.STRING)
@@ -34,7 +34,12 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
     private List<Category> categories;
 
-    public void removeIngredients() {
-
+    public Recipe removeIngredient(Ingredient ingredient) {
+        ingredients.remove(ingredient);
+        ingredient.setRecipe(null);
+        return this;
     }
+
+    @OneToOne
+    private Note note;
 }

@@ -1,7 +1,9 @@
 package com.example.Project1_AWBD.services;
 
+import com.example.Project1_AWBD.entities.Ingredient;
 import com.example.Project1_AWBD.entities.Recipe;
 import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
+import com.example.Project1_AWBD.repositories.IngredientRepository;
 import com.example.Project1_AWBD.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+
+    private final IngredientRepository ingredientRepository;
 
     @Override
     public List<Recipe> findAll() {
@@ -31,23 +35,21 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe save(Recipe recipe) {
-        return recipeRepository.save(recipe);
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        for(Ingredient ingredient : recipe.getIngredients()){
+            ingredient.setRecipe(savedRecipe);
+            ingredientRepository.save(ingredient);
+        }
+        return savedRecipe;
     }
 
     @Override
     public void deleteById(Long id) {
-        /*Optional<Recipe> recipe = recipeRepository.findById(id);
+        Optional<Recipe> recipe = recipeRepository.findById(id);
         if (recipe.isEmpty()) {
             throw new ResourceNotFoundException("recipe " + id + " does not exist");
         }
-        Recipe recipe1 = recipe.get();
-        List<Ingredient> ingredients = new LinkedList<Ingredient>();
-        recipe1.getCategories().iterator().forEachRemaining(ingredients::add);
-        for (Ingredient ingredient : ingredients
-        ) {
-            recipe1.
-        }
-        recipeRepository.deleteById(id);*/
+        recipeRepository.deleteById(id);
     }
 
     @Override
