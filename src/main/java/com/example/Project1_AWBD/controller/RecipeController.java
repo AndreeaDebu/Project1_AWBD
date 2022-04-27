@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/recipe")
 @AllArgsConstructor
 public class RecipeController {
     private final RecipeService recipeService;
 
-    @GetMapping("/find-all-recipes")
+    @GetMapping("/findAll")
     public List<Recipe> findAll() {
         return recipeService.findAll();
     }
 
-    @GetMapping("/find-recipe/{id}")
+    @GetMapping("/findById/{id}")
     public Recipe findById(@PathVariable Long id) {
         return recipeService.findById(id);
     }
@@ -27,12 +28,12 @@ public class RecipeController {
         recipeService.deleteById(id);
     }
 
-    @PutMapping("/update-recipe/{id}")
+    @PutMapping("/updateRecipeById/{id}")
     public Recipe update(@RequestBody Recipe newRecipe, @PathVariable Long id) {
         return recipeService.update(newRecipe, id);
     }
 
-    @PostMapping("/add-recipe")
+    @PostMapping("/addRecipe")
     public Recipe save(@RequestBody Recipe recipe) {
         return recipeService.save(recipe);
     }
