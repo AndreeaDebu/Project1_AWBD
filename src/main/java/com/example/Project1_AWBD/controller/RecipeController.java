@@ -23,8 +23,8 @@ public class RecipeController {
         return recipeService.findById(id);
     }
 
-    @DeleteMapping
-    void deleteById(Long id) {
+    @DeleteMapping("/deleteById/{id}")
+    void deleteById(@PathVariable Long id) {
         recipeService.deleteById(id);
     }
 

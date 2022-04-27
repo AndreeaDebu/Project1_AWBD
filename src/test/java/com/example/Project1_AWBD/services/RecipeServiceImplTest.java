@@ -22,7 +22,6 @@ public class RecipeServiceImplTest {
     @Test
     @Order(1)
     public void test_if_save() {
-        log.error("test");
         Recipe recipe = new Recipe();
         assertNotNull(recipeService.save(recipe));
     }
