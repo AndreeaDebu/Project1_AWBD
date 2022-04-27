@@ -2,6 +2,7 @@ package com.example.Project1_AWBD.services;
 
 import com.example.Project1_AWBD.entities.Recipe;
 import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Slf4j
 public class RecipeServiceImplTest {
 
     @Autowired
@@ -20,6 +22,7 @@ public class RecipeServiceImplTest {
     @Test
     @Order(1)
     public void test_if_save() {
+        log.error("test");
         Recipe recipe = new Recipe();
         assertNotNull(recipeService.save(recipe));
     }

@@ -8,10 +8,14 @@ import java.util.List;
 
 public interface RecipeService {
     List<Recipe> findAll();
-    Recipe findById(Long id);
-    Recipe save(Recipe recipe);
-    void deleteById(Long id);
-    Recipe update(Recipe newRecipe,Long id);
-     void deleteAll();
 
+    Recipe findById(Long id);
+
+    Recipe save(Recipe recipe);
+
+    void deleteById(Long id);
+
+    Recipe update(Recipe newRecipe, Long id);
+
+    void deleteAll();
 }
