@@ -31,17 +31,18 @@ public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username,password,enabled "
-                        + "from participant "
+                        + "from user "
                         + "where username = ?")
                 .authoritiesByUsernameQuery("select username, authority "
                         + "from authorities "
                         + "where username = ?");
-        ;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()/*.anyRequest().authenticated()*/
+        http.authorizeRequests()
+.anyRequest().authenticated()
+
                 .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
                 .antMatchers("/recipe/**").hasRole("CUSTOMER")
                 .and()

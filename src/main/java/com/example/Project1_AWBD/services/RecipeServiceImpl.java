@@ -55,12 +55,14 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe update(Recipe newRecipe, Long id) {
         Recipe recipe = findById(id);
+        if (recipe == null) {
+            throw new ResourceNotFoundException("recipe " + id + " does not exist");
+        }
         recipe.setDescription(newRecipe.getDescription());
         recipe.setCookTime(newRecipe.getCookTime());
         recipe.setDifficulty(newRecipe.getDifficulty());
         recipe.setPrepTime(newRecipe.getPrepTime());
         recipe.setServings(newRecipe.getServings());
-        save(recipe);
-        return recipe;
+        return save(recipe);
     }
 }

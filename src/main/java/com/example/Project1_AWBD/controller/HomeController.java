@@ -18,7 +18,10 @@ public class HomeController {
     RecipeService recipeService;
 
     @GetMapping("/showLogInForm")
-    public String showLogInForm(){ return "login"; }
+    public String showLogInForm(){
+        String msg ="login";
+        return msg;
+    }
 
     @GetMapping("/login-error")
     public String loginError(Model model) {
