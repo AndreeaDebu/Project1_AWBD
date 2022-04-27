@@ -19,16 +19,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> findAll() {
-        List<Recipe> recipes = new LinkedList<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
-        return recipes;
+        return (List<Recipe>) recipeRepository.findAll();
     }
 
     @Override
     public Recipe findById(Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
-        if(!recipe.isPresent()){
-            throw new ResourceNotFoundException("recipe " +id + " does not exist");
+        if (recipe.isEmpty()) {
+            throw new ResourceNotFoundException("recipe " + id + " does not exist");
         }
         return recipe.get();
     }
@@ -40,17 +38,29 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void deleteById(Long id) {
-        Optional<Recipe> recipe = recipeRepository.findById(id);
-        if(!recipe.isPresent()){
-            throw new ResourceNotFoundException("recipe " +id + " does not exist");
+        /*Optional<Recipe> recipe = recipeRepository.findById(id);
+        if (recipe.isEmpty()) {
+            throw new ResourceNotFoundException("recipe " + id + " does not exist");
         }
         Recipe recipe1 = recipe.get();
         List<Ingredient> ingredients = new LinkedList<Ingredient>();
         recipe1.getCategories().iterator().forEachRemaining(ingredients::add);
-        for (Ingredient ingredient: ingredients
+        for (Ingredient ingredient : ingredients
         ) {
             recipe1.
         }
-        recipeRepository.deleteById(id);
+        recipeRepository.deleteById(id);*/
+    }
+
+    @Override
+    public Recipe update(Recipe newRecipe, Long id) {
+        Recipe recipe = findById(id);
+        recipe.setDescription(newRecipe.getDescription());
+        recipe.setCookTime(newRecipe.getCookTime());
+        recipe.setDifficulty(newRecipe.getDifficulty());
+        recipe.setPrepTime(newRecipe.getPrepTime());
+        recipe.setServings(newRecipe.getServings());
+        save(recipe);
+        return recipe;
     }
 }
