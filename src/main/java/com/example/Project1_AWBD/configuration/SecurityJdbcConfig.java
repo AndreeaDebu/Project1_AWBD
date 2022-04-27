@@ -1,56 +1,58 @@
-//package com.example.Project1_AWBD.configuration;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.context.annotation.Profile;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//
-//import javax.sql.DataSource;
-//
-//@Configuration
-//@EnableWebSecurity
-//@Profile("mysql")
-//public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private DataSource dataSource;
-//
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery("select username,password,enabled "
-//                        + "from user "
-//                        + "where username = ?")
-//                .authoritiesByUsernameQuery("select username, authority "
-//                        + "from authorities "
-//                        + "where username = ?");
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()/*.anyRequest().authenticated()*/
-//                .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
-//                .antMatchers("/recipe/**").hasRole("CUSTOMER")
-//                .and()
-//                .formLogin().loginPage("/recipe/findAll")
-//                .loginProcessingUrl("/authUser")
-//                .failureUrl("/login-error").permitAll()
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/access_denied");
-//
-//    }
-//}
-//
-//
+package com.example.Project1_AWBD.configuration;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
+
+@Configuration
+@EnableWebSecurity
+@Profile("mysql")
+public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private DataSource dataSource;
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username,password,enabled "
+                        + "from user "
+                        + "where username = ?")
+                .authoritiesByUsernameQuery("select username, role "
+                        + "from users "
+                        + "where username = ?");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").hasAnyRole("ROLE_USER","ROLE_ADMIN")
+                .antMatchers("/recipes/**").hasAnyRole("ROLE_USER","ROLE_ADMIN")
+                .and()
+                .formLogin().loginPage("/showLogInForm")
+                .loginProcessingUrl("/authUser")
+                .failureUrl("/login-error").permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access_denied");
+
+    }
+}
+
+
+
+

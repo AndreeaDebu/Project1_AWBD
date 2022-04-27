@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/showLogInForm")
     public String showLogInForm(){
-        return "recipes";
+        return "login";
     }
 
     @GetMapping("/login-error")

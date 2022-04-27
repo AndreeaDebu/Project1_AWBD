@@ -23,8 +23,8 @@
         <Logger name="com.example.Project1_AWBD" level="info">
             <AppenderRef ref="RollingRandomAccessFile"/>
         </Logger>
-        <Root level="info">
-            <AppenderRef ref="Console"></AppenderRef>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 

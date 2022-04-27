@@ -1,5 +1,6 @@
 package com.example.Project1_AWBD.services;
 
+import com.example.Project1_AWBD.entities.Ingredient;
 import com.example.Project1_AWBD.entities.Recipe;
 import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
