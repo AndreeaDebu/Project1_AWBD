@@ -17,4 +17,6 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Recipe> recipes;
+
+
 }

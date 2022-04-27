@@ -1,5 +1,6 @@
 package com.example.Project1_AWBD.controller;
 
+import com.example.Project1_AWBD.entities.Ingredient;
 import com.example.Project1_AWBD.entities.Recipe;
 import com.example.Project1_AWBD.services.RecipeService;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,11 @@ public class RecipeController {
     @GetMapping("/findAll")
     public List<Recipe> findAll() {
         return recipeService.findAll();
+    }
+
+    @GetMapping("/findById/{id}")
+    public Recipe findById(@PathVariable Long id) {
+        return recipeService.findById(id);
     }
 
     @DeleteMapping("/deleteById/{id}")
