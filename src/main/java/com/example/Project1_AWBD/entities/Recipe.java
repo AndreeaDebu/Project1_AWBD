@@ -33,4 +33,8 @@ public class Recipe {
             joinColumns = @JoinColumn(referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
     private List<Category> categories;
+
+    public void removeIngredients() {
+
+    }
 }
