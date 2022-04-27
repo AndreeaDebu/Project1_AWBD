@@ -13,4 +13,7 @@ public class UnitOfMeasure {
 
     private String unitOfMeasure;
 
+    @OneToOne
+    private Ingredient ingredient;
+
 }

@@ -18,7 +18,8 @@ public class Ingredient {
     @ManyToOne
     private Recipe recipe;
 
-    @OneToOne
+    @OneToOne(mappedBy = "ingredient",
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private UnitOfMeasure unitOfMeasure;
 
 }
