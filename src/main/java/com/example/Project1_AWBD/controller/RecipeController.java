@@ -23,17 +23,17 @@ public class RecipeController {
         return recipeService.findById(id);
     }
 
-    @DeleteMapping
-    void deleteById(Long id) {
+    @DeleteMapping("deleteById/{id}")
+    void deleteById(@PathVariable Long id) {
         recipeService.deleteById(id);
     }
 
-    @PutMapping("/updateRecipeById/{id}")
+    @PutMapping("/updateById/{id}")
     public Recipe update(@RequestBody Recipe newRecipe, @PathVariable Long id) {
         return recipeService.update(newRecipe, id);
     }
 
-    @PostMapping("/addRecipe")
+    @PostMapping("/add")
     public Recipe save(@RequestBody Recipe recipe) {
         return recipeService.save(recipe);
     }

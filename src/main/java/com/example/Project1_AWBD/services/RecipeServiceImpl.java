@@ -8,6 +8,7 @@ import com.example.Project1_AWBD.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,13 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> findAll() {
-        return (List<Recipe>) recipeRepository.findAll();
+        List<Recipe> recipeList = (List<Recipe>) recipeRepository.findAll();
+        if (recipeList.isEmpty()) {
+            throw new ResourceNotFoundException("No recipies founded");
+        }
+        return recipeList;
     }
+
 
     @Override
     public Recipe findById(Long id) {
@@ -34,11 +40,14 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public Recipe save(Recipe recipe) {
         Recipe savedRecipe = recipeRepository.save(recipe);
-        for(Ingredient ingredient : recipe.getIngredients()){
-            ingredient.setRecipe(savedRecipe);
-            ingredientRepository.save(ingredient);
+        if (recipe.getIngredients() != null) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                ingredient.setRecipe(savedRecipe);
+                ingredientRepository.save(ingredient);
+            }
         }
         return savedRecipe;
     }
@@ -64,5 +73,10 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setPrepTime(newRecipe.getPrepTime());
         recipe.setServings(newRecipe.getServings());
         return save(recipe);
+    }
+
+    @Override
+    public void deleteAll() {
+        recipeRepository.deleteAll();
     }
 }

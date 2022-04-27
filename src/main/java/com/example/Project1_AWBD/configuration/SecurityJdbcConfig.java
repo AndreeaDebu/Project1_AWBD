@@ -40,7 +40,7 @@ public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+      /*  http.authorizeRequests()
 .anyRequest().authenticated()
 
                 .antMatchers("/").hasAnyRole("GUEST","CUSTOMER")
@@ -50,7 +50,7 @@ public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/authUser")
                 .failureUrl("/login-error").permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/access_denied");
+                .exceptionHandling().accessDeniedPage("/access_denied");*/
 
     }
 }
