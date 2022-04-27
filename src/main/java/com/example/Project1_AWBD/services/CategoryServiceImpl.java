@@ -1,7 +1,7 @@
 package com.example.Project1_AWBD.services;
 
 import com.example.Project1_AWBD.entities.Category;
-import com.example.Project1_AWBD.entities.Recipe;
+import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
 import com.example.Project1_AWBD.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(Long id) {
-        return Optional.empty();
+    public Category findById(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        if (category.isEmpty()) {
+            throw new ResourceNotFoundException("category " + id + " does not exist");
+        }
+        return category.get();
     }
 
     @Override

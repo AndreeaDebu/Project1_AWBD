@@ -1,13 +1,11 @@
 package com.example.Project1_AWBD.services;
 
-import com.example.Project1_AWBD.entities.Ingredient;
 import com.example.Project1_AWBD.entities.Recipe;
 import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
 import com.example.Project1_AWBD.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 

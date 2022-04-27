@@ -1,8 +1,8 @@
 package com.example.Project1_AWBD.services;
 
 import com.example.Project1_AWBD.entities.Ingredient;
+import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
 import com.example.Project1_AWBD.repositories.IngredientRepository;
-import com.example.Project1_AWBD.repositories.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +21,12 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Optional<Ingredient> findById(Long id) {
-        return ingredientRepository.findById(id);
+    public Ingredient findById(Long id) {
+        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
+        if (ingredient.isEmpty()) {
+            throw new ResourceNotFoundException("ingredient " + id + " does not exist");
+        }
+        return ingredient.get();
     }
 
     @Override
