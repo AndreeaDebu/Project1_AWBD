@@ -19,8 +19,7 @@ public class HomeController {
 
     @GetMapping("/showLogInForm")
     public String showLogInForm(){
-        String msg ="login";
-        return msg;
+        return "recipes";
     }
 
     @GetMapping("/login-error")
@@ -37,7 +36,7 @@ public class HomeController {
 
     @RequestMapping({"", "/", "/index"})
     public ModelAndView recipesList(){
-        ModelAndView modelAndView = new ModelAndView("login");
+        ModelAndView modelAndView = new ModelAndView("recipes");
         List<Recipe> recipes = recipeService.findAll();
         modelAndView.addObject("recipes",recipes);
         return modelAndView;
