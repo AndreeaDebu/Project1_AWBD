@@ -2,7 +2,7 @@
 <Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
 
     <Properties>
-        <Property name="baseDir">resources/logs</Property>
+        <Property name="baseDir">src/main/logs</Property>
     </Properties>
 
     <Appenders>
@@ -13,7 +13,6 @@
                                  filePattern="${baseDir}/project-%d{yyyy-MM-dd}-%i.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %msg %n" />
             <Policies>
-                <OnStartupTriggeringPolicy />
                 <CronTriggeringPolicy schedule="0 0 0 * * ?" />
                 <SizeBasedTriggeringPolicy size="20 MB" />
             </Policies>
