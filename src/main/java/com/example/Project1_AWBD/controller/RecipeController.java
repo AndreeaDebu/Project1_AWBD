@@ -36,11 +36,6 @@ public class RecipeController {
         return "info";
     }
 
-    @GetMapping("/findById/{id}")
-    public Recipe findById(@PathVariable Long id) {
-        return recipeService.findById(id);
-    }
-
     @DeleteMapping("/deleteById/{id}")
     public String deleteById(@PathVariable String id){
         recipeService.deleteById(Long.valueOf(id));
