@@ -33,7 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/showLogInForm").loginProcessingUrl("/authUser").failureUrl("/login-error").permitAll();}
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and().formLogin().loginPage("/login").loginProcessingUrl("/welcomeCustomer").permitAll();
+    }
 
 
 }
