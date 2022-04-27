@@ -37,7 +37,7 @@ public class HomeController {
 
     @RequestMapping({"", "/", "/index"})
     public ModelAndView recipesList(){
-        ModelAndView modelAndView = new ModelAndView("recipes");
+        ModelAndView modelAndView = new ModelAndView("login");
         List<Recipe> recipes = recipeService.findAll();
         modelAndView.addObject("recipes",recipes);
         return modelAndView;

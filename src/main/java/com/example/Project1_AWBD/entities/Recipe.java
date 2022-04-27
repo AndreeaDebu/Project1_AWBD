@@ -34,6 +34,12 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id",referencedColumnName = "id"))
     private List<Category> categories;
 
+    public Recipe removeIngredient(Ingredient ingredient) {
+        ingredients.remove(ingredient);
+        ingredient.setRecipe(null);
+        return this;
+    }
+
     @OneToOne
     private Note note;
 }
