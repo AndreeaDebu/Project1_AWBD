@@ -18,11 +18,6 @@ public class RecipeController {
         return recipeService.findAll();
     }
 
-    @GetMapping("/findById/{id}")
-    public Recipe findById(@PathVariable Long id) {
-        return recipeService.findById(id);
-    }
-
     @DeleteMapping("/deleteById/{id}")
     void deleteById(@PathVariable Long id) {
         recipeService.deleteById(id);
