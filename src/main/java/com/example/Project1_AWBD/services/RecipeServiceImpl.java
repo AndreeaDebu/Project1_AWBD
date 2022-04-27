@@ -86,6 +86,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
         recipeRepository.deleteAll();
         log.info("All recipies have been deleted");

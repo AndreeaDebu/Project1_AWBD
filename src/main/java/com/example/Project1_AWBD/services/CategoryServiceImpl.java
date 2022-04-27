@@ -4,6 +4,7 @@ import com.example.Project1_AWBD.entities.Category;
 import com.example.Project1_AWBD.exceptions.ResourceNotFoundException;
 import com.example.Project1_AWBD.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
@@ -26,6 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findById(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
         if (category.isEmpty()) {
+            log.error("category " + id + " does not exist");
             throw new ResourceNotFoundException("category " + id + " does not exist");
         }
         return category.get();
